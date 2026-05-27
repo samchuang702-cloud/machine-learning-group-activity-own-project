@@ -1,16 +1,36 @@
 import warnings
 
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import f1_score
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, train_test_split
 
-from common_valence_utils import RANDOM_STATE, build_pipeline, build_split, evaluate_estimator, print_results
+from common_valence_utils import (
+    DATASET_PATH,
+    FEATURE_COLUMNS,
+    LABEL_COLUMN,
+    RANDOM_STATE,
+    TEST_SIZE,
+    build_pipeline,
+    evaluate_estimator_on_split,
+    load_dataset,
+    print_results,
+)
 
 warnings.filterwarnings("ignore")
 
 
 def main() -> None:
-    x_train, _, y_train, _ = build_split()
+    dataset = load_dataset(DATASET_PATH)
+    features = dataset[FEATURE_COLUMNS]
+    labels = dataset[LABEL_COLUMN]
+
+    x_train, x_test, y_train, y_test = train_test_split(
+        features,
+        labels,
+        test_size=TEST_SIZE,
+        stratify=labels,
+        random_state=RANDOM_STATE,
+    )
+
     pipeline = build_pipeline(LogisticRegression(random_state=RANDOM_STATE))
     param_grid = {
         "model__C": [0.001, 0.01, 0.1, 1, 10, 100, 1000],
@@ -28,7 +48,14 @@ def main() -> None:
     )
     grid.fit(x_train, y_train)
 
-    row = evaluate_estimator("Logistic Regression Hyperparameter Tuning", grid.best_estimator_)
+    row = evaluate_estimator_on_split(
+        "Logistic Regression Hyperparameter Tuning",
+        grid.best_estimator_,
+        x_train,
+        x_test,
+        y_train,
+        y_test,
+    )
     row["Best Parameters"] = {
         key.replace("model__", ""): value for key, value in grid.best_params_.items()
     }

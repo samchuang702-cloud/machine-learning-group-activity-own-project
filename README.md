@@ -21,9 +21,10 @@ The evaluation metrics are:
 | --- | --- |
 | `common_valence_utils.py` | Shared dataset loading, preprocessing, train/test split, AUC, and metric utilities |
 | `01_baseline_logistic_regression.py` | Baseline Logistic Regression result |
-| `02_pca_lda_logistic_regression.py` | PCA + Logistic Regression and LDA + Logistic Regression results |
-| `03_logistic_regression_hyperparameter_tuning.py` | GridSearchCV tuning for Logistic Regression |
-| `04_soft_voting_ensemble.py` | Soft Voting Ensemble using tuned LR, SVM, KNN, and Decision Tree |
+| `02_pca_logistic_regression.py` | PCA + Logistic Regression result |
+| `03_lda_logistic_regression.py` | LDA + Logistic Regression result |
+| `04_logistic_regression_hyperparameter_tuning.py` | GridSearchCV tuning for Logistic Regression |
+| `05_soft_voting_ensemble.py` | Soft Voting Ensemble using tuned LR, SVM, KNN, and Decision Tree |
 | `spotify-2023.csv` | Dataset file |
 
 ## Install Dependencies
@@ -42,22 +43,28 @@ Baseline Logistic Regression:
 python 01_baseline_logistic_regression.py
 ```
 
-PCA and LDA Logistic Regression:
+PCA Logistic Regression:
 
 ```bash
-python 02_pca_lda_logistic_regression.py
+python 02_pca_logistic_regression.py
+```
+
+LDA Logistic Regression:
+
+```bash
+python 03_lda_logistic_regression.py
 ```
 
 Logistic Regression Hyperparameter Tuning:
 
 ```bash
-python 03_logistic_regression_hyperparameter_tuning.py
+python 04_logistic_regression_hyperparameter_tuning.py
 ```
 
 Soft Voting Ensemble:
 
 ```bash
-python 04_soft_voting_ensemble.py
+python 05_soft_voting_ensemble.py
 ```
 
 ## Expected Main Scores

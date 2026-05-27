@@ -136,6 +136,17 @@ def get_auc(estimator: object, x_test: pd.DataFrame, y_test: pd.Series) -> float
 
 def evaluate_estimator(model_name: str, estimator: object) -> dict[str, object]:
     x_train, x_test, y_train, y_test = build_split()
+    return evaluate_estimator_on_split(model_name, estimator, x_train, x_test, y_train, y_test)
+
+
+def evaluate_estimator_on_split(
+    model_name: str,
+    estimator: object,
+    x_train: pd.DataFrame,
+    x_test: pd.DataFrame,
+    y_train: pd.Series,
+    y_test: pd.Series,
+) -> dict[str, object]:
     estimator.fit(x_train, y_train)
     predictions = estimator.predict(x_test)
     auc_score = get_auc(estimator, x_test, y_test)

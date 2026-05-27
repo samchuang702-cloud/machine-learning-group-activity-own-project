@@ -1,3 +1,4 @@
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
@@ -28,10 +29,11 @@ def main() -> None:
     )
 
     model = build_pipeline(
-        LogisticRegression(max_iter=2000, random_state=RANDOM_STATE)
+        LogisticRegression(max_iter=2000, random_state=RANDOM_STATE),
+        extra_steps=[("lda", LinearDiscriminantAnalysis(n_components=1))],
     )
     row = evaluate_estimator_on_split(
-        "Baseline Logistic Regression",
+        "LDA (1) + Logistic Regression",
         model,
         x_train,
         x_test,

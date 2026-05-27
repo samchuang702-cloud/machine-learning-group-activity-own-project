@@ -1,3 +1,4 @@
+from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
@@ -28,10 +29,11 @@ def main() -> None:
     )
 
     model = build_pipeline(
-        LogisticRegression(max_iter=2000, random_state=RANDOM_STATE)
+        LogisticRegression(C=1, max_iter=1000, solver="lbfgs", random_state=RANDOM_STATE),
+        extra_steps=[("pca", PCA(n_components=13, random_state=RANDOM_STATE))],
     )
     row = evaluate_estimator_on_split(
-        "Baseline Logistic Regression",
+        "PCA (13) + Logistic Regression",
         model,
         x_train,
         x_test,
