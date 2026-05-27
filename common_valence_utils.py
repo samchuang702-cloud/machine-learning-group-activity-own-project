@@ -9,7 +9,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-DATASET_PATH = Path("spotify-2023.csv")
+PROJECT_ROOT = Path(__file__).resolve().parent
+DATASET_PATH = PROJECT_ROOT / "spotify-2023.csv"
 FEATURE_COLUMNS = [
     "bpm",
     "key",

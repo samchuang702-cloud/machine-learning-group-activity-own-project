@@ -27,6 +27,8 @@ The evaluation metrics are:
 | `05_soft_voting_ensemble.py` | Soft Voting Ensemble using tuned LR, SVM, KNN, and Decision Tree |
 | `spotify-2023.csv` | Dataset file |
 
+The Python scripts load `spotify-2023.csv` from this repository folder automatically, so they can be run directly from VSCode.
+
 ## Install Dependencies
 
 Run this command in the repository folder:
